@@ -48,7 +48,6 @@ class DebtController extends Controller
 
         $debt = Debt::create($request->all());
         $costumer_id = $request->costumer_id;
-//        Costumer::update('debt', $debt, 'quantity', $quantity);
         $costumer = Costumer::where('id',$costumer_id)->first();
         $costumer->debt+=intval($request->quantity);
         $costumer->save();

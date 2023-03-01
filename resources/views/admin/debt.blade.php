@@ -79,14 +79,14 @@
                         @csrf
                         <div class="modal-body">
                             <label for="title">Enter Custumer's name</label>
-                            <select class="custom-select" style="margin-top: 20px;" id="selectBox" required name="costumer_id"  onchange= "desc()">
+                            <select class="custom-select" style="" id="selectBox" required name="costumer_id"  onchange= "desc()">
                                 @foreach($costumers as $costumer)
                                     <option value="{{$costumer->id}}">{{$costumer->name}}</option>
-
                                 @endforeach
                             </select>
                             <span id = "span"></span>
-                            <select class="custom-select" style="margin-top: 20px;" required name="user_id">
+                            <label for="title">Enter User's name</label>
+                            <select class="custom-select" style="" required name="user_id">
                                 @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach

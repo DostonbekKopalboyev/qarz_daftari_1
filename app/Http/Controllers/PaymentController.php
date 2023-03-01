@@ -45,6 +45,11 @@ class PaymentController extends Controller
         ]);
 
         Payment::create($request->all());
+        $costumer_id = $request->costumer_id;
+        $costumer = Costumer::where('id',$costumer_id)->first();
+        $costumer->debt-=intval($request->quantity);
+        $costumer->save();
+
         return redirect()->back();
     }
 
