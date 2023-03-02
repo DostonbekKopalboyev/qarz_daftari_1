@@ -56,10 +56,10 @@
                                             document.getElementById('fname').value='{{$costumer->name}}';
                                             document.getElementById('fphone').value='{{$costumer->phone}}';
                                             document.getElementById('faddress').value='{{$costumer->address}}';
-                                            document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC"/></i></a>
+                                            document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAJBJREFUSEvtlcERQDAQRV8qUQI6UQIdKEEnlKATdEAljAuTmLUZkzhlz3/+332b2Rgil4nsj09ADfRCIw0wvDWpBRTApExZArOkcQP2QMgu398DAg1w20g7+Irq4ZcC3J0lROorTogSoptA9Fu0AplK3BYswPlBWSUduwrogNwzZANaYPQN8PTVZdqfrDsoigM2cxgZ2SeiHAAAAABJRU5ErkJggg=="/></button>
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
 
                                         </form>
                                     </td>

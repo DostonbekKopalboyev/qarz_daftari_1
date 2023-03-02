@@ -28,8 +28,8 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>
-                                <a class="btn btn-danger" href="{{url('editUser/'.$user->id)}}">  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC"/></a>
-                                <a class="btn btn-warning" href="{{url('destroy/'.$user->id)}}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAJBJREFUSEvtlcERQDAQRV8qUQI6UQIdKEEnlKATdEAljAuTmLUZkzhlz3/+332b2Rgil4nsj09ADfRCIw0wvDWpBRTApExZArOkcQP2QMgu398DAg1w20g7+Irq4ZcC3J0lROorTogSoptA9Fu0AplK3BYswPlBWSUduwrogNwzZANaYPQN8PTVZdqfrDsoigM2cxgZ2SeiHAAAAABJRU5ErkJggg=="/></i></a>
+                                <a class="btn btn-warning" href="{{url('editUser/'.$user->id)}}"> <i class="fa fa-pencil"></i> </a>
+                                <a class="btn btn-danger" href="{{url('destroy/'.$user->id)}}"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
