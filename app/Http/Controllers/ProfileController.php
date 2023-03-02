@@ -68,9 +68,10 @@ class ProfileController extends Controller
         ]);
 
         $users = User::find($request->id);
-        $request['password'] = bcrypt($request->password);
+        $users['password'] = bcrypt($request->password);
         $users->name = $request->name;
         $users->email = $request->email;
+
         $users->save();
 
         return redirect()->route('admin.index');

@@ -51,6 +51,7 @@
                                     <td>{{$costumer->trust_status}}</td>
                                     <td>
                                         <form action="{{route('costumer.destroy', $costumer->id)}}" id="deleteDepartmentForm" method="POST">
+                                            <button id="cash" type="button" class="btn btn-primary"><i class="fa fa-wallet"></i></button>
                                             <a onclick="document.getElementById('fid').value='{{$costumer->id}}';
                                             document.getElementById('fname').value='{{$costumer->name}}';
                                             document.getElementById('fphone').value='{{$costumer->phone}}';

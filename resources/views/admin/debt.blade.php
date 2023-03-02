@@ -43,8 +43,8 @@
                             @foreach($debts as $debt)
                                 <tr>
                                     <td>{{$debt->id}}</td>
-                                    <td>{{$debt->cname}}</td>
-                                    <td>{{$debt->uname}}</td>
+                                    <td>{{$debt->costumer->name}}</td>
+                                    <td>{{$debt->user->name}}</td>
                                     <td>{{$debt->product}}</td>
                                     <td>{{$debt->quantity}}</td>
                                     <td>{{$debt->end_day}}</td>
@@ -82,13 +82,6 @@
                             <select class="custom-select" style="" id="selectBox" required name="costumer_id"  onchange= "desc()">
                                 @foreach($costumers as $costumer)
                                     <option value="{{$costumer->id}}">{{$costumer->name}}</option>
-                                @endforeach
-                            </select>
-                            <span id = "span"></span>
-                            <label for="title">Enter User's name</label>
-                            <select class="custom-select" style="" required name="user_id">
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
 

@@ -13,7 +13,7 @@ class Costumer extends Model
     ];
     public function Dept()
     {
-        return $this->hasMany(Debt::class);
+        return $this->hasMany(Debt::class,'costumer_id','id');
     }
     public function Payment()
     {

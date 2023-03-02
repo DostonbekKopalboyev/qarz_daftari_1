@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Costumer;
+use App\Models\Debt;
+use App\Models\Payment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -14,6 +16,9 @@ class CostumerController extends Controller
     public function index()
     {
         $costumers = Costumer::all();
+//        $info = Debt::all()->sortByDesc('created_at');
+//        $info = Payment::all()->sortByDesc('created_at');
+//        dd($info);
         return view('admin.costumer', ['costumers' => $costumers]);
     }
 

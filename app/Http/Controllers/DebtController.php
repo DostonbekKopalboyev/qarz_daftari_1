@@ -15,14 +15,9 @@ class DebtController extends Controller
      */
     public function index()
     {
-        $debts = DB::select("SELECT debts.id, debts.costumer_id, debts.user_id,
-       debts.product, debts.quantity, debts.end_day, debts.created_at, debts.status,
-       costumers.name as cname, users.name as uname from debts
-           INNER JOIN costumers on debts.costumer_id =costumers.id
-           INNER JOIN users on debts.user_id =users.id;");
-        $users = User::all();
+        $debts = Debt::all();
         $costumers = Costumer::all();
-        return view('admin.debt', ['debts'=>$debts, 'users'=>$users, 'costumers'=>$costumers]);
+        return view('admin.debt', ['debts'=>$debts,'costumers'=>$costumers]);
     }
 
     /**
@@ -40,15 +35,15 @@ class DebtController extends Controller
     {
         $request->validate([
            'costumer_id' => 'required',
-           'user_id' => 'required',
            'product' => 'required',
            'quantity' => 'required',
            'end_day' => 'required'
         ]);
-
-        $debt = Debt::create($request->all());
+        $debt = $request->all();
+        $debt['user_id']=auth()->user()->id;
+        Debt::create($debt);
         $costumer_id = $request->costumer_id;
-        $costumer = Costumer::where('id',$costumer_id)->first();
+        $costumer = Costumer::find('id',$costumer_id)->first();
         $costumer->debt+=intval($request->quantity);
         $costumer->save();
         return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
