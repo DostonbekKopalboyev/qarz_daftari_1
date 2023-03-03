@@ -87,7 +87,7 @@ class CostumerController extends Controller
         $costumer->address = $request->address;
         $costumer->description = $request->description;
         $costumer->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     /**
