@@ -40,17 +40,18 @@ class PaymentController extends Controller
     {
         $request->validate([
             'costumer_id' => 'required',
-            'user_id' => 'required',
             'quantity' => 'required',
         ]);
 
-        Payment::create($request->all());
+        $payment = $request->all();
+        $payment['user_id']=auth()->user()->id;
         $costumer_id = $request->costumer_id;
         $costumer = Costumer::where('id',$costumer_id)->first();
         $costumer->debt-=intval($request->quantity);
         $costumer->save();
+        Payment::create($payment);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
     }
 
     /**

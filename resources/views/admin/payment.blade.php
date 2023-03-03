@@ -73,13 +73,6 @@
                                 @endforeach
                             </select>
 
-                            <label for="title" style="margin-top: 15px;">Enter User's name</label>
-                            <select class="custom-select" style="" required name="user_id">
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
-
                             <label for="quantity" style="margin-top: 15px;">Enter quantity of payment</label>
                             <input type="number" id="quantity" name="quantity" class="form-control" required>
 
