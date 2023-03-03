@@ -24,24 +24,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
 
-//            $table->unsignedBigInteger('product')->index();
-//            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
-//
-//            $table->unsignedBigInteger('quantity')->index();
-//            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
-//
-//            $table->unsignedBigInteger('end_day')->index();
-//            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
+            $table->unsignedBigInteger('payment_id')->index();
+            $table->foreign('payment_id')->references('id')->on('payment')->onDelete('cascade');
 
-
-//            $table->unsignedBigInteger('costumer_name')->index();
-//            $table->foreign('costumer_id')->references('id')->on('costumers')->onDelete('cascade');
-//            $table->unsignedBigInteger('user_id')->index();
-//            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-//            $table->text('product');
-//            $table->text('quantity');
-//            $table->date('end_day');
-//            $table->integer('status')->nullable();
 
             $table->timestamps();
         });
