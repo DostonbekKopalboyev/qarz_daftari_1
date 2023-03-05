@@ -34,6 +34,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
+    @yield('head')
 </head>
 
 <body>
@@ -60,6 +61,7 @@
                 <a href="{{url('costumer')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Costumers</a>
                 <a href="{{url('debt')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Debt</a>
                 <a href="{{url('payment')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Payment</a>
+                <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
 
             </div>
 
@@ -122,10 +124,6 @@
     </div>
     <!-- Content End -->
 
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-</div>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

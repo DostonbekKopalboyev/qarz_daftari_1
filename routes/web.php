@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,8 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('admin.index');
+//Route::get('/statistics', function () {
+//    return view('admin.statistics');
 //});
 
 //Route::get('/dashboard', function () {
@@ -36,7 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/destroy/{id}', [ProfileController::class, 'destroy']);
 
     Route::get('/debt_info/{costumer}',[CostumerController::class,'debt_info'])->name('debt_info');
+
     Route::resource('/costumer', CostumerController::class);
+
+    Route::resource('/statistics', StatisticController::class);
 
     Route::resource('/debt', DebtController::class);
 
