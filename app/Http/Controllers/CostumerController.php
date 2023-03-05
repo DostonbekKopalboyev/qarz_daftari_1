@@ -15,7 +15,7 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        $costumers = Costumer::all();
+        $costumers = Costumer::all()->sortByDesc('debt');
 
 //        $info = Debt::all()->sortByDesc('created_at');
 //        $info = Payment::all()->sortByDesc('created_at');
@@ -30,7 +30,7 @@ class CostumerController extends Controller
     {
         //
     }
-    public function debt_info(Request $request,Costumer $costumer){
+    public function debt_info(Request $request, Costumer $costumer){
         $debts = $costumer->debts;
 
         return view('admin.debt_info')->with('debts',$debts);

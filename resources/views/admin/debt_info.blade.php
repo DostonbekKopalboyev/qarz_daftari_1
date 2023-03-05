@@ -8,7 +8,9 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <a href="{{url('costumer')}}"  style="margin: 30px;" class="btn btn-success" >Orqaga</a>
+                        <a href="{{url('costumer')}}"  style="margin: 30px;" class="btn btn-success" > <-- Back </a>
+                        <a href="{{url('debt_info')}}"   class="btn btn-danger" >History of debts</a>
+                        <a href="{{url('costumer')}}"   class="btn btn-warning" >History of payments</a>
 
                         <table class="table table-hover">
                             <thead>
@@ -24,7 +26,7 @@
                                     Product
                                 </th>
                                 <th>
-                                    quantity
+                                    Debts
                                 </th>
                                 <th>
                                     date
