@@ -45,7 +45,7 @@ class ProfileController extends Controller
         $users->password = bcrypt($password);
         $users->save();
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qp\'shildi');
     }
 
 
@@ -74,7 +74,7 @@ class ProfileController extends Controller
 
         $users->save();
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     public function destroy($id)

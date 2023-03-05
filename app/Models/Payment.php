@@ -12,13 +12,13 @@ class Payment extends Model
         'costumer_id', 'user_id', 'quantity'
     ];
 
-    public function User()
+    public function user()
     {
-        $this->belongsTo(User::class);
+       return $this->belongsTo(User::class, 'user_id','id');
     }
 
-    public function Costumer()
+    public function costumer()
     {
-        $this->belongsTo(Costumer::class);
+       return $this->belongsTo(Costumer::class, 'costumer_id','id');
     }
 }

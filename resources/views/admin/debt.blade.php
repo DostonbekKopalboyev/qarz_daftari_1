@@ -113,5 +113,22 @@
         </script>
 @endsection
 @section('script')
+            @if (session('success'))
 
+                <script>
+
+                    $(document).ready(function() {
+
+                        Swal.fire({
+                            showConfirmButton: false,
+                            timer: 2000,
+
+                            title:'{{session('success')}}',
+                            icon:'success',
+
+                        });
+                    });
+                </script>
+
+    @endif
 @endsection

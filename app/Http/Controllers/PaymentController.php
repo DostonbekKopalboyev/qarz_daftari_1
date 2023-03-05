@@ -15,11 +15,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = DB::select("SELECT payments.id, payments.costumer_id, payments.user_id,
-            payments.quantity, payments.created_at,
-            costumers.name as cname, users.name as uname from payments
-           INNER JOIN costumers on payments.costumer_id =costumers.id
-           INNER JOIN users on payments.user_id =users.id;");
+        $payments = Payment::all();
         $costumers = Costumer::all();
         $users = User::all();
         return view('admin.payment', ['payments' => $payments, 'costumers' => $costumers, 'users' => $users]);

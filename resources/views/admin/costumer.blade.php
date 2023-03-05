@@ -51,18 +51,25 @@
                                     <td>{{$costumer->debt}}</td>
                                     <td>{{$costumer->trust_status}}</td>
                                     <td>
-                                        <form action="{{route('costumer.destroy', $costumer->id)}}" id="deleteDepartmentForm" method="POST">
-                                            <a href="{{route('debt_info',$costumer->id)}}" class="btn btn-primary" ><i class="fa fa-wallet"></i></a>
-                                            <a onclick="document.getElementById('fid').value='{{$costumer->id}}';
+                                        <form action="{{route('costumer.destroy', $costumer->id)}}" id="deleteCostumerForm" method="POST">
+{{--                                            <a onclick="document.getElementById('fid').value='{{$costumer->id}}';--}}
+{{--                                            document.getElementById('fname').value='{{$costumer->name}}';--}}
+{{--                                            document.getElementById('fphone').value='{{$costumer->phone}}';--}}
+{{--                                            document.getElementById('faddress').value='{{$costumer->address}}';--}}
+{{--                                            document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>--}}
+{{--                                          --}}
+                                            @csrf
+                                            @method('DELETE')
+{{--                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                                        </form>
+                                        <a href="{{route('debt_info',$costumer->id)}}" class="btn btn-primary" ><i class="fa fa-wallet"></i></a>
+                                        <a onclick="document.getElementById('fid').value='{{$costumer->id}}';
                                             document.getElementById('fname').value='{{$costumer->name}}';
                                             document.getElementById('fphone').value='{{$costumer->phone}}';
                                             document.getElementById('faddress').value='{{$costumer->address}}';
                                             document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button onclick="del()" class="btn btn-danger"><i class="fa fa-trash"></i></button>
 
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -125,7 +132,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('costumer.update',1)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('costumer.update', $costumer->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -156,3 +163,47 @@
     </div>
 
 @endsection
+@section('script')
+    <script>
+        form = document.getElementById('deleteCostumerForm');
+        function del(){
+            Swal.fire({
+                title: 'Haqiqatdanam o\'chirishni xohlaysizmi?',
+                text: "O\'chirilgandan so\'ng sizni uni qayta tiklay olmaysiz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ha, o\'chirilsin!',
+                cancelButtonText: 'Bekor qilish'
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })}
+
+
+
+    </script>
+
+    @if (session('success'))
+
+        <script>
+
+            $(document).ready(function() {
+
+                Swal.fire({
+                    showConfirmButton: false,
+                    timer: 2000,
+
+                    title:'{{session('success')}}',
+                    icon:'success',
+
+                });
+            });
+        </script>
+
+    @endif
+@endsection
+

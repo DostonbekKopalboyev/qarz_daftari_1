@@ -50,7 +50,7 @@ class CostumerController extends Controller
         $costumer = $request->all();
         $costumer['user_id'] = auth()->user()->id;
         Costumer::create($costumer);
-        return redirect()->back()->with('status', 'Muvaffaqqiyatli qo\'shildi');
+        return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
     }
 
     /**

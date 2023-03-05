@@ -34,8 +34,8 @@
                             @foreach($payments as $payment)
                                 <tr>
                                     <td>{{$payment->id}}</td>
-                                    <td>{{$payment->cname}}</td>
-                                    <td>{{$payment->uname}}</td>
+                                    <td>{{$payment->costumer->name}}</td>
+                                    <td>{{$payment->user->name}}</td>
                                     <td>{{$payment->quantity}}</td>
                                     <td>{{$payment->created_at}}</td>
                                 </tr>
@@ -86,4 +86,24 @@
 
             </div>
         </div>
+@endsection
+        @section('script')
+            @if (session('success'))
+
+                <script>
+
+                    $(document).ready(function() {
+
+                        Swal.fire({
+                            showConfirmButton: false,
+                            timer: 2000,
+
+                            title:'{{session('success')}}',
+                            icon:'success',
+
+                        });
+                    });
+                </script>
+
+    @endif
 @endsection

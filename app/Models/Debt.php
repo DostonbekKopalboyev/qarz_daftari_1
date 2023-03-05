@@ -21,8 +21,4 @@ class Debt extends Model
     {
         return $this->belongsTo(Costumer::class,'costumer_id','id');
     }
-//    public function debt()
-//    {
-//        return $this->hasMany(Costumer::class);
-//    }
 }

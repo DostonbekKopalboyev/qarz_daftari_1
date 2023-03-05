@@ -29,8 +29,11 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
+                                        <form action="{{url('destroy/'.$user->id)}}" id="deleteCostumerForm" method="GET">
+
+                                        </form>
                                         <a class="btn btn-warning" href="{{url('editUser/'.$user->id)}}"> <i class="fa fa-pencil"></i> </a>
-                                        <a class="btn btn-danger" href="{{url('destroy/'.$user->id)}}"><i class="fa fa-trash"></i></a>
+                                        <button onclick="del()"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -48,4 +51,46 @@
 
 
 @endsection
+@section('script')
+    <script>
+        form = document.getElementById('deleteCostumerForm');
+        function del(){
+            Swal.fire({
+                title: 'Haqiqatdanam o\'chirishni xohlaysizmi?',
+                text: "O\'chirilgandan so\'ng sizni uni qayta tiklay olmaysiz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ha, o\'chirilsin!',
+                cancelButtonText: 'Bekor qilish'
 
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })}
+
+
+
+    </script>
+
+    @if (session('success'))
+
+        <script>
+
+            $(document).ready(function() {
+
+                Swal.fire({
+                    showConfirmButton: false,
+                    timer: 2000,
+
+                    title:'{{session('success')}}',
+                    icon:'success',
+
+                });
+            });
+        </script>
+
+    @endif
+@endsection
