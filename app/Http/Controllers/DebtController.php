@@ -81,7 +81,5 @@ class DebtController extends Controller
         //
     }
 
-//    public function modal(){
-//        return
-//    }
+
 }

@@ -25,10 +25,11 @@ class User extends Authenticatable
 
     public function debt()
     {
-        return $this->hasMany(Debt::class);
+        return $this->hasMany(Debt::class, 'user_id', 'id');
     }
+
     public function costumer(){
-        return $this->hasMany(Costumer::class,'user_id');
+        return $this->hasMany(Costumer::class,'user_id', 'id');
     }
 
     /**

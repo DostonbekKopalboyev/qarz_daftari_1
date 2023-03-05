@@ -7,6 +7,7 @@ use App\Models\Debt;
 use App\Models\Payment;
 use App\Models\Statistic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
@@ -15,10 +16,11 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        $costuers = Costumer::all();
+//        $costumers = DB::select("SELECT SUM(debt) AS DEBT FROM costumers;");
+        $costumers = Costumer::all();
         $debts = Debt::all();
         $payments = Payment::all();
-        return view('admin.statistics', ['costumers' => $costuers, 'debts' => $debts, 'payments' => $payments]);
+        return view('admin.statistics', ['costumers' => $costumers, 'debts' => $debts, 'payments' => $payments]);
     }
 
     /**
@@ -42,12 +44,16 @@ class StatisticController extends Controller
      */
     public function show(Statistic $statistic)
     {
-//        $sum = 0;
-//        $costumer = Costumer::all();
-//        foreach ($costumer->debt as $debts_all){
-//        $sum += $debts_all;
+//        $debt = $costumer->debt;
+//        $costumers = Costumer::find('debt', $debt)->get();
+//        $sum = array_sum($costumers);
+//        dd($sum);
+
+//        return redirect()->back();
+//        foreach ($costumers as $costumer){
+
 //        }
-//        return $sum;
+
     }
 
     /**

@@ -35,14 +35,10 @@ class ProfileController extends Controller
             'password' => 'required'
         ]);
 
-        $name = $request->name;
-        $email = $request->email;
-        $password = $request->password;
-
         $users = new User();
-        $users->name = $name;
-        $users->email = $email;
-        $users->password = bcrypt($password);
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = bcrypt($request->password);
         $users->save();
 
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qo\'shildi');
@@ -71,7 +67,6 @@ class ProfileController extends Controller
         $users['password'] = bcrypt($request->password);
         $users->name = $request->name;
         $users->email = $request->email;
-
         $users->save();
 
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli yangilandi');
