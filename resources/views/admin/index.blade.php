@@ -57,7 +57,7 @@
         function del(){
             Swal.fire({
                 title: 'Haqiqatdanam o\'chirishni xohlaysizmi?',
-                text: "O\'chirilgandan so\'ng sizni uni qayta tiklay olmaysiz!",
+                text: "O\'chirilgandan so\'ng siz uni qayta tiklay olmaysiz!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

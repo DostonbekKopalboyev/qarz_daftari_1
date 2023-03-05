@@ -45,7 +45,7 @@ class ProfileController extends Controller
         $users->password = bcrypt($password);
         $users->save();
 
-        return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qp\'shildi');
+        return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qo\'shildi');
     }
 
 
