@@ -10,17 +10,17 @@
                 @csrf
                 <div class="col-md-5">
                     <label class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter name">
+                    <input type="text" class="form-control" name="name" placeholder="Enter name" required>
                 </div>
 
                 <div class="col-md-5">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" name="email" placeholder="Enter email" required>
                 </div>
 
                 <div class="col-md-5">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Enter password">
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="margin: 10px;">Save</button>
