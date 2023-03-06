@@ -16,13 +16,10 @@ class StatisticController extends Controller
      */
     public function index()
     {
-//        $costumers = DB::select("SELECT SUM(debt) AS DEBT FROM costumers;");
         $costumers = Costumer::all()->sum('debt');
         $debts = Debt::all();
         $payments = Payment::all();
-//        $debt = $costumers->debt;
 
-//        $data = Costumer::where('debt', $debt)->sum('amount');
 
         return view('admin.statistics', ['costumers' => $costumers, 'debts' => $debts, 'payments' => $payments]);
     }
