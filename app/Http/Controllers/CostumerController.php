@@ -32,7 +32,7 @@ class CostumerController extends Controller
     }
     public function debt_info(Request $request,Costumer $costumer){
         $debts = $costumer->debts;
-        $payments = $costumer->payment;
+        $payments = $costumer->payments;
 
         return view('admin.debt_info',['debts'=>$debts,'payments'=>$payments]);
     }

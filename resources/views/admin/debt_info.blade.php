@@ -47,7 +47,10 @@
 
                                 </tr>
                             @endforeach
-
+                            <tr>
+                                <th colspan="3" style="text-align: center">Jami</th>
+                                <th colspan="3">15000</th>
+                            </tr>
                             </tbody>
                         </table>
 
@@ -83,7 +86,10 @@
                                     <td>{{$payment->created_at}}</td>
                                 </tr>
                             @endforeach
-
+                            <tr>
+                                <th colspan="2" style="text-align: center">Jami</th>
+                                <th colspan="2" >15000</th>
+                            </tr>
                             </tbody>
                         </table>
 

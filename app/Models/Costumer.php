@@ -13,11 +13,11 @@ class Costumer extends Model
     ];
     public function debts()
     {
-        return $this->hasMany(Debt::class,'costumer_id','id');
+        return $this->hasMany(Debt::class,'costumer_id','id')->orderBy('created_at','desc');
     }
-    public function Payment()
+    public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class)->orderBy('created_at','desc');
     }
     public function DebtAll()
     {
