@@ -10,7 +10,7 @@
                     <i class="fa fa-chart-line fa-3x text-primary"></i>
                     <div class="ms-4">
                         <p class="mb-2">Depts of today</p>
-                        <h6 class="mb-0">$1234</h6>
+                        <h6 class="mb-0">{{$today_debts_show}} so'm</h6>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     <i class="fa fa-chart-bar fa-3x text-primary"></i>
                     <div class="ms-4">
                         <p class="mb-2">Payments of today</p>
-                        <h6 class="mb-0">$1234</h6>
+                        <h6 class="mb-0">{{$total_payments_show}} so'm</h6>
                     </div>
                 </div>
             </div>
