@@ -24,7 +24,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="margin: 10px;">Save</button>
-                <a href="{{url('admins')}}" class="btn btn-danger">Back</a>
+                <a href="{{route('admin.index')}}" class="btn btn-danger">Back</a>
             </form>
             </form>
         </div>

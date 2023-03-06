@@ -8,7 +8,7 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <button href="" type="button"  style="margin: 30px;" class="btn btn-success" >Orqaga</button>
+                        <a href="{{url('costumer')}}" type="button"  style="margin: 30px;" class="btn btn-success" >Orqaga</a>
 
                         <table class="table table-hover">
                             <thead>
