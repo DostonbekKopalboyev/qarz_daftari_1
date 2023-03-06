@@ -49,7 +49,7 @@
                             @endforeach
                             <tr>
                                 <th colspan="3" style="text-align: center">Jami</th>
-                                <th colspan="3">15000</th>
+                                <th colspan="3">{{$costumer_debts}}</th>
                             </tr>
                             </tbody>
                         </table>
@@ -88,7 +88,7 @@
                             @endforeach
                             <tr>
                                 <th colspan="2" style="text-align: center">Jami</th>
-                                <th colspan="2" >15000</th>
+                                <th colspan="2" >{{$costumer_payments}}</th>
                             </tr>
                             </tbody>
                         </table>
