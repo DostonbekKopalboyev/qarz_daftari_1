@@ -49,7 +49,7 @@
                             @endforeach
                             <tr>
                                 <th colspan="3" style="text-align: center">Jami</th>
-                                <th colspan="3">15000</th>
+                                <th colspan="3" style="text-align: center">15000</th>
                             </tr>
                             </tbody>
                         </table>
@@ -85,10 +85,12 @@
                                     <td>{{$payment->quantity}}</td>
                                     <td>{{$payment->created_at}}</td>
                                 </tr>
-                            @endforeach
+                            @endforeac
                             <tr>
+                                @foreach($payments as $payment)
                                 <th colspan="2" style="text-align: center">Jami</th>
-                                <th colspan="2" >15000</th>
+                                <th colspan="2" style="text-align: center">{{$payment->quantity+=$payment->quantity}}</th>
+                                @endforeach
                             </tr>
                             </tbody>
                         </table>
