@@ -10,6 +10,7 @@
                         {{--                    modal uchun button--}}
                         <a href="{{url('costumer')}}" type="button"  style="margin: 30px;" class="btn btn-success" >Orqaga</a>
 
+                        <p>This Customer's debts</p>
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -54,7 +55,7 @@
                             </tbody>
                         </table>
 
-                        <p>Paymet</p>
+                        <p>This Customer's payments</p>
 
                         <table class="table table-hover">
                             <thead>
@@ -62,9 +63,6 @@
                                 <th>
                                     Id
                                 </th>
-{{--                                <th>--}}
-{{--                                    Costumer's name--}}
-{{--                                </th>--}}
                                 <th>
                                     User's name
                                 </th>
@@ -80,7 +78,6 @@
                             @foreach($payments as $payment)
                                 <tr>
                                     <td>{{$payment->id}}</td>
-{{--                                    <td>{{$payment->costumer->cname}}</td>--}}
                                     <td>{{$payment->user->name}}</td>
                                     <td>{{$payment->quantity}}</td>
                                     <td>{{$payment->created_at}}</td>

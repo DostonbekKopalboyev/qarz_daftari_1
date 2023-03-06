@@ -16,12 +16,38 @@ class StatisticController extends Controller
      */
     public function index()
     {
+        //Jami xaridorlarda sotuvchining qancha miqdordagi puli yotibdi, shuni ko'rsatadi
         $costumers = Costumer::all()->sum('debt');
-        $debts = Debt::all();
+
+
         $payments = Payment::all();
+        $debts = Debt::all();
+        $today = date("Y-m-d");
+        $total_debts = 0;
+        $total_payments = 0;
+        $beginningOfDay = $today . " 00:00:00";
+        $endOfDay = $today . " 23:59:59";
+
+//Bugun qancha xaridor sotuvchidan qancha miqdorda qarz olib ketti, shuni ko'rsatadi
+        foreach ($debts as $debt){
+            if($beginningOfDay <= $debt['created_at'] and $endOfDay >= $debt['created_at']){
+                $total_debts += $debt->quantity;
+            }
+        }
+        $today_debts_show = $total_debts;
+//        dd($today_debts_show);
+
+//Bugun qancha xaridor sotuvchiga qancha miqdorda qarzini uzib ketti, shuni ko'rsatadi
+        foreach ($payments as $payment){
+            if($beginningOfDay <= $payment['created_at'] and $endOfDay >= $payment['created_at']){
+                $total_payments += $payment->quantity;
+            }
+        }
+        $total_payments_show = $total_payments;
+//        dd($total_payments_show);
 
 
-        return view('admin.statistics', ['costumers' => $costumers, 'debts' => $debts, 'payments' => $payments]);
+        return view('admin.statistics', ['costumers' => $costumers, 'debts' => $debts, 'payments' => $payments, 'today_debts_show' => $today_debts_show, 'total_payments_show' => $total_payments_show]);
     }
 
     /**
