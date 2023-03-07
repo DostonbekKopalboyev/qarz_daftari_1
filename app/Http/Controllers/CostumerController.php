@@ -36,10 +36,8 @@ class CostumerController extends Controller
 
 
 //        dd($costumer->id);
-        $costumer_debts = Debt::where('costumer_id', $costumer->id)->sum('quantity');
-        $costumer_payments = Payment::where('costumer_id', $costumer->id)->sum('quantity');
 
-        return view('admin.debt_info',['debts'=>$debts,'payments'=>$payments, 'costumer_debts'=>$costumer_debts, 'costumer_payments'=>$costumer_payments]);
+        return view('admin.debt_info',['debts'=>$debts,'payments'=>$payments, ]);
     }
 
 
