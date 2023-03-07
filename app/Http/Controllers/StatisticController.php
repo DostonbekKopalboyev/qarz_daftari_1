@@ -70,10 +70,11 @@ class StatisticController extends Controller
 //        dd($total_payments_show);
 
 
-        return view('admin.statistics', ['costumers' => $costumers, 'debts_quantity' => $debts_quantity, 'paymets_quantity' => $paymets_quantity,
-            'payment_key' => $payment_key,'payment_val'=>$payment_val,
+        return view('admin.statistics', [
+            'costumers' => $costumers, 'debts_quantity' => $debts_quantity,
+            'paymets_quantity' => $paymets_quantity, 'payment_key' => $payment_key,'payment_val'=>$payment_val,
             'debt_key' => $debt_key, 'debt_value' => $debt_value,
-             'debts_costumers_key' =>  $debts_costumers_key, 'debts_costumers_val' => $debts_costumers_val
+            'debts_costumers_key' =>  $debts_costumers_key, 'debts_costumers_val' => $debts_costumers_val
         ]);
     }
 
