@@ -43,21 +43,30 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Worldwide Sales</h6>
+                        <h6 class="mb-0">Debts</h6>
                     </div>
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
+
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Salse & Revenue</h6>
+                        <h6 class="mb-0"> Index of payments weekly </h6>
                     </div>
-                    <canvas id="salse-revenue"></canvas>
+                    <canvas id="barChartID"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
+{{--<div>--}}
+{{--    <h1 style="color:green">GeeksforGeeks</h1>--}}
+{{--    <h3>Chart JS Bar Chart </h3>--}}
+{{--    <div>--}}
+{{--        <canvas id="barChartID"></canvas>--}}
+{{--    </div>--}}
+{{--</div>--}}
     <!-- Sales Chart End -->
 
 {{--    <div class="col-sm-12 col-xl-6">--}}
@@ -103,8 +112,8 @@
         labels: labels,
         datasets: [{
             label: 'Statistics of debters',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: '#1e90ff',
+            borderColor: '#1e90ff',
             data: users,
         }]
     };
@@ -123,6 +132,27 @@
 </script>
 
 
+<script type="text/javascript">
+
+    var labels =  {{ Js::from($payment_key) }};
+    var users =  {{ Js::from($payment_val) }};
+
+    // Bar chart
+    new Chart($("#barChartID"), {
+        type: 'bar',
+        options: {},
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Weekly payments",
+                    backgroundColor: [ "#1e90ff"],
+                    data: users,
+                }
+            ]
+        }
+    });
+</script>
 
 
 @endsection
