@@ -49,8 +49,10 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <th colspan="3" style="text-align: center">Jami</th>
-                                <th colspan="3">{{$costumer_debts}}</th>
+                                <th>{{$debts->count('id')}}</th>
+                                <th colspan="2" style="text-align: center">Jami</th>
+
+                                <th colspan="3">{{$debts->sum('quantity')}}</th>
                             </tr>
                             </tbody>
                         </table>
@@ -84,8 +86,9 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <th colspan="2" style="text-align: center">Jami</th>
-                                <th colspan="2" >{{$costumer_payments}}</th>
+                                <th>{{$payments->count('id')}}</th>
+                                <th colspan="1" style="text-align: center">Jami</th>
+                                <th colspan="2" >{{$payments->sum('quantity')}}</th>
                             </tr>
                             </tbody>
                         </table>

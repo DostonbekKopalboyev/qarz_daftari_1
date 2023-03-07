@@ -10,7 +10,7 @@
                     <i class="fa fa-chart-line fa-3x text-primary"></i>
                     <div class="ms-4">
                         <p class="mb-2">Depts of today</p>
-                        <h6 class="mb-0">{{$today_debts_show}} so'm</h6>
+                        <h6 class="mb-0">{{$debts_quantity}} so'm</h6>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     <i class="fa fa-chart-bar fa-3x text-primary"></i>
                     <div class="ms-4">
                         <p class="mb-2">Payments of today</p>
-                        <h6 class="mb-0">{{$total_payments_show}} so'm</h6>
+                        <h6 class="mb-0">{{$paymets_quantity}} so'm</h6>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Worldwide Sales</h6>
                     </div>
-                    <canvas id="worldwide-sales"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
             <div class="col-sm-12 col-xl-6">
@@ -90,5 +90,39 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('asset/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript">
+
+    var labels =  {{ Js::from($debts_costumers_key) }};
+    var users =  {{ Js::from($debts_costumers_val) }};
+
+//var labels = [12,22,32,42];
+//var users = [22,11,11,22];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Statistics of debters',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: users,
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+</script>
+
+
+
 
 @endsection
