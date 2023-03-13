@@ -19,17 +19,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->bigInteger('debt')->default(0);
             $table->text('trust_status')->nullable();
-
-
-            $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('payment_id')->index();
-            $table->foreign('payment_id')->references('id')->on('payment')->onDelete('cascade');
-
-
+            $table->foreignId('payment_id')->on('payment')->onDelete('cascade');
+            $table->foreignId('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            //$table->softDeletes();
+           // $table->softDeletes();
         });
     }
 
