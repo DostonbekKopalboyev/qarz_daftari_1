@@ -83,6 +83,34 @@
 {{--    </div>--}}
 
 
+{{--    15kunlik debt va payment lar bir jadvalda --}}
+<!-- Sales Chart Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Worldwide Sales</h6>
+                    <a href="">Show All</a>
+                </div>
+                <canvas id="worldwide-sales"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Salse & Revenue</h6>
+                    <a href="">Show All</a>
+                </div>
+                <canvas id="salse-revenue"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sales Chart End -->
+
+
+
 @endsection
 @section('script')
 
@@ -134,9 +162,14 @@
 
 <script type="text/javascript">
 
-    var labels =  {{ Js::from($payment_key) }};
-    var users =  {{ Js::from($payment_val) }};
-
+    @if(!isset($payments))
+    @foreach($payments as $key=>$value)
+    {{$payment_key[] = $key}}
+    {{$payment_val[]=$value}}
+    @endforeach
+        var labels =  {{ Js::from($payment_key) }};
+        var users =  {{ Js::from($payment_val) }};
+    @endif
     // Bar chart
     new Chart($("#barChartID"), {
         type: 'bar',
