@@ -29,16 +29,10 @@ class StatisticController extends Controller
 
         $payments = Payment::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(6)->pluck('quantity','created_at')->toArray();
         //$payments_date = Payment::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->pluck('created_at')->toArray();
-        foreach($payments as $key=>$value) {
-            $payment_key[] = $key;
-            $payment_val[] = $value;
-        }
-//        dd($payments);
+
+      //  dd($payments);
         $debts = Debt::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(7)->pluck('quantity')->toArray();
-        foreach ($debts as $key=>$value) {
-            $debt_key = $key;
-            $debt_value = $value;
-        }
+
 
         $debts_quantity = Debt::whereDate('created_at', now())->get()->sum('quantity');
         $paymets_quantity = Payment::whereDate('created_at', now())->get()->sum('quantity');
@@ -71,10 +65,13 @@ class StatisticController extends Controller
 
 
         return view('admin.statistics', [
-            'costumers' => $costumers, 'debts_quantity' => $debts_quantity,
-            'paymets_quantity' => $paymets_quantity, 'payment_key' => $payment_key,'payment_val'=>$payment_val,
-            'debt_key' => $debt_key, 'debt_value' => $debt_value,
-            'debts_costumers_key' =>  $debts_costumers_key, 'debts_costumers_val' => $debts_costumers_val
+            'costumers' => $costumers,
+            'debts_quantity' => $debts_quantity,
+            'paymets_quantity' => $paymets_quantity,
+            'debts_costumers_key' =>  $debts_costumers_key,
+            'debts_costumers_val' => $debts_costumers_val,
+            'payments'=>$payments,
+            'debts'=>$debts
         ]);
     }
 
