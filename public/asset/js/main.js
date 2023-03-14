@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -61,7 +61,7 @@
 
     // Worldwide Sales Chart
     var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
-    var myChart1 = new Chart(ctx1, {
+    var myCharts = new Chart(ctx1, {
         type: "bar",
         data: {
             labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
@@ -112,7 +112,7 @@
             responsive: true
         }
     });
-    
+
 
 
     // Single Line Chart
@@ -202,6 +202,6 @@
         }
     });
 
-    
+
 })(jQuery);
 

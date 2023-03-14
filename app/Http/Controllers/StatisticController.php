@@ -25,43 +25,27 @@ class StatisticController extends Controller
             $debts_costumers_key[] = $key;
             $debts_costumers_val[] = $value;
         }
-//        dd($debts_costumers);
-
         $payments = Payment::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(6)->pluck('quantity','created_at')->toArray();
-        //$payments_date = Payment::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->pluck('created_at')->toArray();
-
-      //  dd($payments);
         $debts = Debt::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(7)->pluck('quantity')->toArray();
 
 
         $debts_quantity = Debt::whereDate('created_at', now())->get()->sum('quantity');
         $paymets_quantity = Payment::whereDate('created_at', now())->get()->sum('quantity');
 
+//        1haftalik payment va debt
+        $week_statistic_debt =Debt::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(7)->pluck('quantity','created_at')->toArray();
+        foreach($week_statistic_debt as $key=>$value) {
+            $week_statistic_key[] = $key;
+            $week_statistic_val[] = $value;
+        }
 
-//
-//        $today = date("Y-m-d");
-//        $total_debts = 0;
-//        $total_payments = 0;
-//        $beginningOfDay = $today . " 00:00:00";
-//        $endOfDay = $today . " 23:59:59";
-
-//Bugun qancha xaridor sotuvchidan qancha miqdorda qarz olib ketti, shuni ko'rsatadi
-//        foreach ($debts as $debt){
-//            if($beginningOfDay <= $debt['created_at'] and $endOfDay >= $debt['created_at']){
-//                $total_debts += $debt->quantity;
-//            }
-//        }
-//        $today_debts_show = $total_debts;
-//        dd($today_debts_show);
-
-//Bugun qancha xaridor sotuvchiga qancha miqdorda qarzini uzib ketti, shuni ko'rsatadi
-//        foreach ($payments as $payment){
-//            if($beginningOfDay <= $payment['created_at'] and $endOfDay >= $payment['created_at']){
-//                $total_payments += $payment->quantity;
-//            }
-//        }
-//        $total_payments_show = $total_payments;
-//        dd($total_payments_show);
+        $week_statistic_payment =Payment::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->take(7)->pluck('quantity','created_at')->toArray();
+  if(!isset($week_statistic_payment)){
+        foreach($week_statistic_payment as $key=>$value) {
+            $statistic_pay_key[] = $key;
+            $statistic_pay_val[] = $value;
+        }
+  }
 
 
         return view('admin.statistics', [
@@ -71,7 +55,11 @@ class StatisticController extends Controller
             'debts_costumers_key' =>  $debts_costumers_key,
             'debts_costumers_val' => $debts_costumers_val,
             'payments'=>$payments,
-            'debts'=>$debts
+            'debts'=>$debts,
+            'week_statistic_key'=>$week_statistic_key,
+            'week_statistic_val'=>$week_statistic_val,
+            'week_statistic_pay_key'=>$statistic_pay_key,
+            'week_statistic_pay_val'=>$statistic_pay_val,
         ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DebtController;
@@ -40,16 +41,22 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/costumer', CostumerController::class);
 
-    Route::resource('/statistics', StatisticController::class);
-
     Route::resource('/debt', DebtController::class);
 
     Route::resource('/payment', PaymentController::class);
+
+//    Route::resource('/statistics', StatisticController::class);
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::middleware(['auth','role:admin'])->group(function(){
+    //roles
+    Route::resource('/roles',RoleController::class);
+
+    Route::resource('/statistics', StatisticController::class);
 });
 
 require __DIR__.'/auth.php';

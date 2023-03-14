@@ -61,8 +61,9 @@
                 <a href="{{url('costumer')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Costumers</a>
                 <a href="{{url('debt')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Debt</a>
                 <a href="{{url('payment')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Payment</a>
-                <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
-
+                @if(auth()->user()->hasRole('admin'))
+                    <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
+                @endif
             </div>
 
         </nav>
