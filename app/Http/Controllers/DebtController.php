@@ -43,7 +43,7 @@ class DebtController extends Controller
         $debt['user_id']=auth()->user()->id;
         $costumer_id = $request->costumer_id;
         $costumer = Costumer::where('id',$costumer_id)->first();
-        $costumer->debt+=intval($request->quantity);
+        $costumer->debt += intval($request->quantity);
         $costumer->save();
         Debt::create($debt);
         return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');

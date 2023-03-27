@@ -45,18 +45,18 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/payment', PaymentController::class);
 
-//    Route::resource('/statistics', StatisticController::class);
+    Route::resource('/statistics', StatisticController::class);
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::middleware(['auth','role:admin'])->group(function(){
-    //roles
-    Route::resource('/roles',RoleController::class);
-
-    Route::resource('/statistics', StatisticController::class);
-});
+//Route::middleware(['auth','role:admin'])->group(function(){
+//    //roles
+//    Route::resource('/roles',RoleController::class);
+//
+//    Route::resource('/statistics', StatisticController::class);
+//});
 
 require __DIR__.'/auth.php';
