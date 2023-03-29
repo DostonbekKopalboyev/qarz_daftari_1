@@ -22,7 +22,10 @@ class StatisticController extends Controller
         $debts_quantity = Debt::whereDate('created_at', now())->get()->sum('quantity');
         $paymets_quantity = Payment::whereDate('created_at', now())->get()->sum('quantity');
 
+        $debts_costumers_key = $debts_costumers_val = [];
+
         $debts_costumers = Costumer::all()->take(7)->pluck('debt', 'name')->toArray();
+
         foreach($debts_costumers as $key=>$value) {
             $debts_costumers_key[] = $key;
             $debts_costumers_val[] = $value;
@@ -102,9 +105,6 @@ class StatisticController extends Controller
             $pstatistic_val[] = $value;
         }
 //        dd($pstatistic_val);
-
-
-
 
         return view('admin.statistics', [
             'costumers' => $costumers,

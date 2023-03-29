@@ -23,6 +23,15 @@
                     <input type="password" class="form-control" name="password" placeholder="Enter password" required>
                 </div>
 
+                <div class="col-md-5">
+                    <label class="form-label">Role</label>
+                <select class="custom-select" style="" id="selectBox" required name="role" >
+                    @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                    @endforeach
+                </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary" style="margin: 10px;">Save</button>
                 <a href="{{route('admin.index')}}" class="btn btn-danger">Back</a>
             </form>

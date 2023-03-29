@@ -26,6 +26,14 @@
                         <input type="password" class="form-control" name="password" placeholder="Enter password">
                     </div>
 
+                    <div class="col-md-5">
+                        <label class="form-label">Role</label>
+                        <select class="custom-select" style="" id="selectBox" required name="role"  >
+                            <option value="1" >admin</option>
+                            <option value="2">manager</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-primary" style="margin: 10px;">Update</button>
                     <a href="{{route('admin.index')}}" class="btn btn-danger">Back</a>
                 </form>

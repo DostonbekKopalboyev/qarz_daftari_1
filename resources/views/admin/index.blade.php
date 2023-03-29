@@ -16,6 +16,7 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Ism</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Operation</th>
                             </tr>
                             </thead>
@@ -28,12 +29,20 @@
                                     <th scope="row">{{$i++}}</th>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
+                                    <td>{{$user->role}}</td>
+
                                     <td>
-                                        <form action="{{url('destroy/'.$user->id)}}" id="deleteCostumerForm" method="GET">
+
+                                        <form action="{{url('destroy/'. $user->id)}}" id="deleteCostumerForm{{$user->id}}" method="GET">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="del({{$user->id}})" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+
+                                            <a class="btn btn-warning" href="{{url('editUser/'.$user->id)}}"> <i class="fa fa-pencil"></i> </a>
+                                            <a href="{{route('admin.permission',$user->id)}}" class="btn btn-primary"><i class="fa fa-user"></i></a>
 
                                         </form>
-                                        <a class="btn btn-warning" href="{{url('editUser/'.$user->id)}}"> <i class="fa fa-pencil"></i> </a>
-                                        <button onclick="del()"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,8 +62,8 @@
 @endsection
 @section('script')
     <script>
-        form = document.getElementById('deleteCostumerForm');
-        function del(){
+        // form = document.getElementById('deleteCostumerForm');
+        function del(id){
             Swal.fire({
                 title: 'Haqiqatdanam o\'chirishni xohlaysizmi?',
                 text: "O\'chirilgandan so\'ng siz uni qayta tiklay olmaysiz!",
@@ -67,7 +76,7 @@
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    form.submit();
+                    document.getElementById('deleteCostumerForm'+id).submit();
                 }
             })}
 
@@ -94,3 +103,4 @@
 
     @endif
 @endsection
+{{--toLocaleString()--}}

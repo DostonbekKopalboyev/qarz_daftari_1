@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
@@ -19,28 +21,35 @@ class ProfileController extends Controller
     public function index(): View
     {
         $users = User::all();
+
         return view('admin.index', ['users' => $users]);
     }
 
     public function create(): View
     {
-        return view('admin.addUser');
+        $roles = Role::all();
+
+        return view('admin.addUser',['roles'=>$roles]);
     }
 
     public function store(Request $request): RedirectResponse
     {
+      //  dd($request->all());
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required'
+
         ]);
 
-        $users = new User();
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = bcrypt($request->password);
-        $users->save();
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
 
+        $user->save();
+        $user->assignRole($request->role);
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qo\'shildi');
     }
 
@@ -60,13 +69,15 @@ class ProfileController extends Controller
             'id' => 'required',
             'name' => 'required',
             'password' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'role' => 'required'
         ]);
 
         $users = User::find($request->id);
         $users['password'] = bcrypt($request->password);
         $users->name = $request->name;
         $users->email = $request->email;
+        $users->role = $request->role;
         $users->save();
 
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli yangilandi');
@@ -77,6 +88,27 @@ class ProfileController extends Controller
         User::where('id', $id)->delete();
         return redirect()->back();
     }
+
+    public function permission(User $user){
+        $user_permission = $user->permissions;
+        $permissions = Permission::all();
+        return view('admin.permissions',['user_permissions'=>$user_permission, 'user'=>$user,'permissions'=>$permissions]);
+    }
+    public function add_permission(User $user, Request $request){
+
+        if(!$user->hasPermissionTo($request->permission)){
+            return \redirect()->back();
+        }
+        else{
+            $user->givePermissionTo($request->permission);
+            return \redirect()->back();
+        }
+    }
+    public function revoke_permission($permission, User $user){
+        $user->revokePermissionTo($permission);
+        return redirect()->back();
+    }
+
 
 
 //    public function edit(Request $request): View

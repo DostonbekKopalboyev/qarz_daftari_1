@@ -46,7 +46,7 @@
                                     <td>{{$debt->costumer->name}}</td>
                                     <td>{{$debt->user->name}}</td>
                                     <td>{{$debt->product}}</td>
-                                    <td>{{$debt->quantity}}</td>
+                                    <td><span class="money">{{$debt->quantity}}</span></td>
                                     <td>{{$debt->end_day}}</td>
                                     <td>{{$debt->created_at}}</td>
                                     <td>{{$debt->status}}</td>

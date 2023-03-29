@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('trust_status')->nullable();
 
 
-             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+//            $table->unsignedBigInteger('user_id')->index()->nullable();
+//            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();

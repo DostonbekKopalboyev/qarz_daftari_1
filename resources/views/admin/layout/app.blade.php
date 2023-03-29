@@ -57,14 +57,18 @@
             <div class="d-flex align-items-center ms-4 mb-4">
             </div>
             <div class="navbar-nav w-100">
-                <a href="{{route('admin.index')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>List of users</a>
+
+
                 <a href="{{url('costumer')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Costumers</a>
                 <a href="{{url('debt')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Debt</a>
                 <a href="{{url('payment')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Payment</a>
-                <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
-                {{--                @if(auth()->user()->hasRole('admin'))--}}
-{{--                    <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>--}}
-{{--                @endif--}}
+{{--                <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>--}}
+
+                @if(auth()->user()->hasRole('admin'))
+                    <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
+
+                    <a href="{{route('admin.index')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>List of users</a>
+                @endif
             </div>
 
         </nav>
@@ -141,7 +145,16 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 
-{{--    for sweet Alert--}}
+{{--    simple money frmat for numbers by jquery--}}
+    <script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="{{asset('asset/simple.money.format.js')}}"></script>
+    <script>
+        $('.money').simpleMoneyFormat();
+        console.log($('.money').text());
+    </script>
+
+
+    {{--    for sweet Alert--}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Template Javascript -->
 <script src="{{asset('asset/js/main.js')}}"></script>

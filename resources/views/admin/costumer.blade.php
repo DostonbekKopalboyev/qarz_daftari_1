@@ -48,27 +48,25 @@
                                     <td>{{$costumer->phone}}</td>
                                     <td>{{$costumer->address}}</td>
                                     <td>{{$costumer->description}}</td>
-                                    <td>{{$costumer->debt}}</td>
+                                    <td><span class="money">{{$costumer->debt}}</span></td>
                                     <td>{{$costumer->trust_status}}</td>
                                     <td>
-                                        <form action="{{route('costumer.destroy', $costumer->id)}}" id="deleteCostumerForm" method="POST">
-{{--                                            <a onclick="document.getElementById('fid').value='{{$costumer->id}}';--}}
-{{--                                            document.getElementById('fname').value='{{$costumer->name}}';--}}
-{{--                                            document.getElementById('fphone').value='{{$costumer->phone}}';--}}
-{{--                                            document.getElementById('faddress').value='{{$costumer->address}}';--}}
-{{--                                            document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>--}}
-{{--                                          --}}
+                                        @if(auth()->user()->hasRole('admin'))
+                                        <form action="{{route('costumer.destroy', $costumer->id)}}" id="deleteCostumerForm{{$costumer->id}}" method="POST">
+
                                             @csrf
                                             @method('DELETE')
-{{--                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                                            <button onclick="del({{$costumer->id}})" class="btn btn-danger" type="button"><i class="fa fa-trash"></i></button>
                                         </form>
-                                        <a href="{{route('debt_info',$costumer->id)}}" class="btn btn-primary" ><i class="fa fa-wallet"></i></a>
-                                        <a onclick="document.getElementById('fid').value='{{$costumer->id}}';
+
+                                            <a onclick="document.getElementById('fid').value='{{$costumer->id}}';
                                             document.getElementById('fname').value='{{$costumer->name}}';
                                             document.getElementById('fphone').value='{{$costumer->phone}}';
                                             document.getElementById('faddress').value='{{$costumer->address}}';
                                             document.getElementById('fdescription').value='{{$costumer->description}}';" id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>
-                                        <button onclick="del()" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        @endif
+
+                                        <a href="{{route('debt_info',$costumer->id)}}" class="btn btn-primary" ><i class="fa fa-wallet"></i></a>
 
                                     </td>
                                 </tr>
@@ -165,8 +163,7 @@
 @endsection
 @section('script')
     <script>
-        form = document.getElementById('deleteCostumerForm');
-        function del(){
+        function del(id){
             Swal.fire({
                 title: 'Haqiqatdanam o\'chirishni xohlaysizmi?',
                 text: "O\'chirilgandan so\'ng siz uni qayta tiklay olmaysiz!",
@@ -175,11 +172,11 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Ha, o\'chirilsin!',
-                cancelButtonText: 'Bekor qilish'
+                cancelButtonText: 'Bekor qilish',
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    form.submit();
+                    document.getElementById('deleteCostumerForm'+id).submit();
                 }
             })}
 
@@ -205,5 +202,9 @@
         </script>
 
     @endif
+    <script>
+        $('.money').simpleMoneyFormat();
+        console.log($('.money').text());
+    </script>
 @endsection
 

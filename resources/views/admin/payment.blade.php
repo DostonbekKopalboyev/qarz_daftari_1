@@ -36,7 +36,7 @@
                                     <td>{{$payment->id}}</td>
                                     <td>{{$payment->costumer->name}}</td>
                                     <td>{{$payment->user->name}}</td>
-                                    <td>{{$payment->quantity}}</td>
+                                    <td><span class="money">{{$payment->quantity}}</span></td>
                                     <td>{{$payment->created_at}}</td>
                                 </tr>
                             @endforeach
@@ -106,4 +106,8 @@
                 </script>
 
     @endif
+                <script>
+                    $('.money').simpleMoneyFormat();
+                    console.log($('.money').text());
+                </script>
 @endsection

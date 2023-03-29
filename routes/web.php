@@ -7,6 +7,7 @@ use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +29,26 @@ use App\Http\Controllers\StatisticController;
 //})->middleware(['auth', 'verified'])->name('dashboard');
 //
 
+Route::middleware(['auth', 'role:admin'] )->group(function(){
+    Route::get('/user/permission_delete/{permission}/{user}',[ProfileController::class,'revoke_permission'])->name('admin.permission.revoke');
+    Route::post('/user/permission_add/{user}',[ProfileController::class,'add_permission'])->name('add_permission');
+    Route::get('/user/{user}/permissions/',[ProfileController::class,'permission'])->name('admin.permission');
 
-Route::middleware('auth')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('admin.index');
     Route::get('/addUser', [ProfileController::class, 'create'])->name('admin.addUser');
     Route::post('store', [ProfileController::class, 'store']);
     Route::get('/editUser/{id}', [ProfileController::class, 'edit'])->name('admin.editUser');
     Route::post('/update', [ProfileController::class, 'update']);
     Route::get('/destroy/{id}', [ProfileController::class, 'destroy']);
+
+    Route::resource('/statistics', StatisticController::class);
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'role:admin|manager'])->group(function(){
 
     Route::get('/debt_info/{costumer}',[CostumerController::class,'debt_info'])->name('debt_info');
 
@@ -44,19 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/debt', DebtController::class);
 
     Route::resource('/payment', PaymentController::class);
-
-    Route::resource('/statistics', StatisticController::class);
-
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-//Route::middleware(['auth','role:admin'])->group(function(){
-//    //roles
-//    Route::resource('/roles',RoleController::class);
-//
-//    Route::resource('/statistics', StatisticController::class);
-//});
 
 require __DIR__.'/auth.php';

@@ -9,7 +9,9 @@
                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                         <div class="ms-4">
                             <p class="mb-2">Depts of today</p>
-                            <h6 class="mb-0">{{$debts_quantity}} so'm</h6>
+                            <h6 class="mb-0">
+
+                                <span class="money">{{$debts_quantity}}</span> so'm</h6>
                         </div>
                     </div>
                 </div>
@@ -18,7 +20,7 @@
                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                         <div class="ms-4">
                             <p class="mb-2">Payments of today</p>
-                            <h6 class="mb-0">{{$paymets_quantity}} so'm</h6>
+                            <h6 class="mb-0"> <span class="money">{{$paymets_quantity}}</span> so'm</h6>
                         </div>
                     </div>
                 </div>
@@ -27,7 +29,7 @@
                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                         <div class="ms-4">
                             <p class="mb-2">All depts</p>
-                            <h6 class="mb-0">{{$costumers}} so'm </h6>
+                            <h6 class="mb-0"> <span class="money">{{$costumers}}</span> so'm </h6>
                         </div>
                     </div>
                 </div>
@@ -65,6 +67,9 @@
 
 
     <script type="text/javascript">
+
+        {{--var debts_quantity =  {{ Js::from($debts_quantity) }};--}}
+
         var labels =  {{ Js::from($debts_costumers_key) }};
         var users =  {{ Js::from($debts_costumers_val) }};
         // Bar chart
@@ -110,6 +115,10 @@
             }
         });
     </script>
-
+    <script>
+        $('.money').simpleMoneyFormat();
+        console.log($('.money').text());
+    </script>
 
 @endsection
+{{--toLocaleString()--}}

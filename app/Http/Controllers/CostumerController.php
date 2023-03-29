@@ -46,6 +46,7 @@ class CostumerController extends Controller
      */
     public function store(Request $request):RedirectResponse
     {
+//        dd($request->all());
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
