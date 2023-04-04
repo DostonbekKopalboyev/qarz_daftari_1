@@ -11,6 +11,7 @@ return [
     'statistics' => 'Статистика',
     'list' => 'Список пользователей',
     'admin' => 'админ',
+    'myprofile' => 'Личный кабинет',
 
     //    for index.blade.php
     'create_button' => 'Создать',

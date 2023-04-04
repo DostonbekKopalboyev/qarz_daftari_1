@@ -11,6 +11,7 @@
         'statistics' => 'Statistics',
         'list' => 'List of users',
         'admin' => 'admin',
+        'myprofile' => 'My Profile',
 
         //    for index.blade.php
         'create_button' => 'Create',

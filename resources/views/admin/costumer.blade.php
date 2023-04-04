@@ -59,7 +59,7 @@
                                             <button onclick="del({{$costumer->id}})" class="btn btn-danger" type="button"><i class="fa fa-trash"></i></button>
                                         </form>
 
-                                            <a onclick="func({{$costumer}})"
+                                            <a onclick="func({{$costumer}}, '{{ route('costumer.update', $costumer->id) }}')"
                                                id="showModal" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i></a>
                                         @endif
 
@@ -95,7 +95,7 @@
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
-                            <input id="fid" style="display: none" name="id" required>
+                            <input id="fid" type="hidden" name="id" required>
 
                             <label for="name">Mijoz nomini yangilash</label>
                             <input type="text" id="fname" name="name" value="" class="form-control" required>
@@ -163,8 +163,9 @@
 @endsection
 @section('script')
     <script>
-        function func(costumer){
+        function func(costumer, route){
             console.log(costumer.name);
+            document.getElementById('fid').value = costumer.id;
             document.getElementById('fname').value = costumer.name;
             console.log(costumer.phone);
             document.getElementById('fphone').value = costumer.phone;
@@ -173,6 +174,7 @@
             console.log(costumer.description);
             document.getElementById('fdescription').value = costumer.description;
             var form = document.getElementById('update_form');
+            form.setAttribute('action', route);
         }
 
         function del(id){

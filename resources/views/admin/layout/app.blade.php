@@ -133,6 +133,7 @@
                         <img class="rounded-circle me-lg-2" src="{{asset('asset/img/adminimage.png')}}" alt="" style="width: 40px; height: 40px;">
                         <span class="d-none d-lg-inline-flex">{{auth()->user()->name}}</span>
                     </a>
+
                     <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -143,8 +144,12 @@
                                 <i class="icon-key"></i>
                                 <span class="ml-2">@lang('message.logout') </span>
                             </a>
+                            <a href="{{route('account')}}" class="dropdown-item">@lang('message.myprofile')</a>
+
                         </form>
                     </div>
+
+
                 </div>
             </div>
         </nav>

@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'role:admin'] )->group(function(){
     Route::put('/update/{user}', [ProfileController::class, 'update'])->name('update');
     Route::get('/destroy/{id}', [ProfileController::class, 'destroy']);
 
+
     Route::resource('/statistics', StatisticController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -60,6 +62,10 @@ Route::middleware(['auth', 'role:admin|manager'])->group(function(){
     Route::resource('/debt', DebtController::class);
 
     Route::resource('/payment', PaymentController::class);
+
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::post('update', [AccountController::class, 'updatePassword'])->name('updatePassword');
+
 });
 
 require __DIR__.'/auth.php';

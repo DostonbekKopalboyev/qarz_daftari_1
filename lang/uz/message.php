@@ -12,6 +12,7 @@ return [
     'statistics' => 'Statistika',
     'list' => 'Foydalanuvchilar ro\'yhati',
     'admin' => 'admin',
+    'myprofile' => 'Shaxsiy kabinet',
 
     //    for index.blade.php
     'create_button' => 'Yaratish',
