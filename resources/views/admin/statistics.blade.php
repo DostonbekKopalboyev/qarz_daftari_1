@@ -8,10 +8,10 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                         <div class="ms-4">
-                            <p class="mb-2">Depts of today</p>
+                            <p class="mb-2">@lang('message.today_debts')</p>
                             <h6 class="mb-0">
 
-                                <span class="money">{{$debts_quantity}}</span> so'm</h6>
+                                <span class="money">{{$debts_quantity}}</span> @lang('message.sum')</h6>
                         </div>
                     </div>
                 </div>
@@ -19,8 +19,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                         <div class="ms-4">
-                            <p class="mb-2">Payments of today</p>
-                            <h6 class="mb-0"> <span class="money">{{$paymets_quantity}}</span> so'm</h6>
+                            <p class="mb-2">@lang('message.today_payments')</p>
+                            <h6 class="mb-0"> <span class="money">{{$paymets_quantity}}</span> @lang('message.sum')</h6>
                         </div>
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                         <div class="ms-4">
-                            <p class="mb-2">All depts</p>
-                            <h6 class="mb-0"> <span class="money">{{$costumers}}</span> so'm </h6>
+                            <p class="mb-2">@lang('message.total_debts')</p>
+                            <h6 class="mb-0"> <span class="money">{{$costumers}}</span> @lang('message.sum') </h6>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Last 7 days statistis</h6>
+                        <h6 class="mb-0">@lang('message.last_day_stat')</h6>
                     </div>
                     <canvas id="week_statistics" ></canvas>
                 </div>
@@ -53,7 +53,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Index of payments weekly</h6>
+                        <h6 class="mb-0">@lang('message.weekly_payment_stat')</h6>
                     </div>
                     <canvas id="barChartID" ></canvas>
                 </div>
@@ -80,7 +80,7 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: "Weekly payments",
+                        label: "@lang('message.w_debts')",
                         backgroundColor: [ "#1e90ff"],
                         data: users,
                     }
@@ -102,12 +102,12 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: "Weekly debts",
+                        label: "@lang('message.w_debts')",
                         backgroundColor: [ "#1e90ff"],
                         data: users1,
                     },
                     {
-                        label: "Weekly payments",
+                        label: "@lang('message.w_payments')",
                         backgroundColor: [ "rgb(255, 0, 0)"],
                         data: users2,
                     }

@@ -10,7 +10,7 @@ class Costumer extends Model
 {
     use HasFactory; //use SoftDeletes;
     protected $fillable = [
-      'name', 'phone', 'address', 'description', 'debt', 'trust_status','user_id'
+      'name', 'phone', 'address', 'description', 'debt', 'trust_status',
     ];
     public function debts()
     {
@@ -24,8 +24,8 @@ class Costumer extends Model
     {
         return $this->belongsTo(Debt::class);
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class,'user_id','id');
-    }
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class,'user_id','id');
+//    }
 }

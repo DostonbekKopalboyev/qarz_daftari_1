@@ -11,7 +11,7 @@
                         @endforeach
                     </select>
                 </div>
-                <input type="submit" class="btn btn-success" value="Saqlash">
+                <input type="submit" class="btn btn-success" value="@lang('message.save_button')">
             </form>
         </div>
 

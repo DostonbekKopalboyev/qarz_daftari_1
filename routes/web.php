@@ -8,6 +8,7 @@ use App\Http\Controllers\DebtController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\LangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ use App\Http\Middleware\RoleMiddleware;
 //})->middleware(['auth', 'verified'])->name('dashboard');
 //
 
+Route::get('language', [LangController::class, 'setLang'])->name('lang.switch');
+
 Route::middleware(['auth', 'role:admin'] )->group(function(){
     Route::get('/user/permission_delete/{permission}/{user}',[ProfileController::class,'revoke_permission'])->name('admin.permission.revoke');
     Route::post('/user/permission_add/{user}',[ProfileController::class,'add_permission'])->name('add_permission');
@@ -38,7 +41,7 @@ Route::middleware(['auth', 'role:admin'] )->group(function(){
     Route::get('/addUser', [ProfileController::class, 'create'])->name('admin.addUser');
     Route::post('store', [ProfileController::class, 'store']);
     Route::get('/editUser/{id}', [ProfileController::class, 'edit'])->name('admin.editUser');
-    Route::post('/update', [ProfileController::class, 'update']);
+    Route::put('/update/{user}', [ProfileController::class, 'update'])->name('update');
     Route::get('/destroy/{id}', [ProfileController::class, 'destroy']);
 
     Route::resource('/statistics', StatisticController::class);

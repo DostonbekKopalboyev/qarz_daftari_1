@@ -8,16 +8,16 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <a href="{{url('addUser')}}"  style="margin: 30px;" class="btn btn-success">Yaratish</a>
+                        <a href="{{url('addUser')}}"  style="margin: 30px;" class="btn btn-success">@lang('message.create_button')</a>
 
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Ism</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Operation</th>
+                                <th scope="col">@lang('message.no')</th>
+                                <th scope="col">@lang('message.name')</th>
+                                <th scope="col">@lang('message.email')</th>
+                                <th scope="col">@lang('message.role')</th>
+                                <th scope="col">@lang('message.operation')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,15 +29,17 @@
                                     <th scope="row">{{$i++}}</th>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->role}}</td>
+
+                                    <td>{{ $user->getRoleNames()->implode(',')}}</td>
 
                                     <td>
 
                                         <form action="{{url('destroy/'. $user->id)}}" id="deleteCostumerForm{{$user->id}}" method="GET">
                                             @csrf
                                             @method('DELETE')
+                                            @if(auth()->user()->hasPermissionTo('profile.destroy') && auth()->user()->hasRole('admin'))
                                             <button onclick="del({{$user->id}})" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-
+@endif
                                             <a class="btn btn-warning" href="{{url('editUser/'.$user->id)}}"> <i class="fa fa-pencil"></i> </a>
                                             <a href="{{route('admin.permission',$user->id)}}" class="btn btn-primary"><i class="fa fa-user"></i></a>
 
@@ -48,7 +50,7 @@
                             @endforeach
                             </tbody>
                         </table>
-
+                        {{ $users->links() }}
                     </div>
 
                 </div>

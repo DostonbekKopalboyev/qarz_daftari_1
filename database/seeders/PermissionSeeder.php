@@ -22,15 +22,13 @@ class PermissionSeeder extends Seeder
             'profile.store',
             'profile.update',
             'profile.destroy',
+            'profile.permission',
             'costumer.store',
             'costumer.update',
             'costumer.destroy',
+            'costumer.debt_info',
             'debt.store',
-            'debt.update',
-            'debt.destroy',
             'payment.store',
-            'payment.update',
-            'payment.destroy'
         ];
         $role = Role::first();
         $user = User::first();

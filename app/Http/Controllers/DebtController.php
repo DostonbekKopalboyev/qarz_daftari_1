@@ -6,7 +6,9 @@ use App\Models\Costumer;
 use App\Models\Debt;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class DebtController extends Controller
 {
@@ -15,7 +17,7 @@ class DebtController extends Controller
      */
     public function index()
     {
-        $debts = Debt::all();
+        $debts = Debt::paginate(20);
         $costumers = Costumer::all();
         return view('admin.debt', ['debts'=>$debts,'costumers'=>$costumers]);
     }
@@ -33,20 +35,23 @@ class DebtController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-           'costumer_id' => 'required',
-           'product' => 'required',
-           'quantity' => 'required',
-           'end_day' => 'required'
-        ]);
-        $debt = $request->all();
-        $debt['user_id']=auth()->user()->id;
-        $costumer_id = $request->costumer_id;
-        $costumer = Costumer::where('id',$costumer_id)->first();
-        $costumer->debt += intval($request->quantity);
-        $costumer->save();
-        Debt::create($debt);
-        return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
+        if(Auth::user()->hasDirectPermission('debt.store')) {
+            $request->validate([
+                'costumer_id' => 'required',
+                'product' => 'required',
+                'quantity' => 'required',
+                'end_day' => 'required'
+            ]);
+            $debt = $request->all();
+            $debt['user_id'] = auth()->user()->id;
+            $costumer_id = $request->costumer_id;
+            $costumer = Costumer::where('id', $costumer_id)->first();
+            $costumer->debt += intval($request->quantity);
+            $costumer->save();
+            Debt::create($debt);
+        }
+            return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
+
     }
 
     /**
@@ -80,6 +85,13 @@ class DebtController extends Controller
     {
         //
     }
-
+    public function permission(User $user)
+    {
+        if(Auth::user()->hasDirectPermission('profile.permission')) {
+            $user_permission = $user->permissions;
+            $permissions = Permission::all();
+            return view('admin.permissions',['user_permissions'=>$user_permission, 'user'=>$user,'permissions'=>$permissions]);
+        }
+    }
 
 }

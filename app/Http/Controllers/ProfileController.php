@@ -20,7 +20,7 @@ class ProfileController extends Controller
      */
     public function index(): View
     {
-        $users = User::all();
+        $users = User::paginate(20);
 
         return view('admin.index', ['users' => $users]);
     }
@@ -34,74 +34,82 @@ class ProfileController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-      //  dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role' => 'required'
+        if(Auth::user()->hasDirectPermission('profile.store')) {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+                'role' => 'required'
+            ]);
 
-        ]);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->assignRole($request->role);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-
-        $user->save();
-        $user->assignRole($request->role);
+            $user->save();
+        }
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli qo\'shildi');
     }
 
 
     public function edit($id): View
     {
-        $users = User::where('id', $id)->first();
-        return view('admin.editUser', compact('users'));
+
+        $roles = Role::all();
+        $user = User::where('id', $id)->first();
+        return view('admin.editUser', compact('user'),['roles'=>$roles]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request, User $users): RedirectResponse
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $request->validate([
-            'id' => 'required',
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'role' => 'required'
-        ]);
+//        dd($request->all());
+        if(Auth::user()->hasDirectPermission('profile.update')) {
+            $request->validate([
+                'id' => 'required',
+                'name' => 'required',
+                'password' => 'required',
+                'email' => 'required',
+                'role' => 'required'
+            ]);
 
-        $users = User::find($request->id);
-        $users['password'] = bcrypt($request->password);
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->role = $request->role;
-        $users->save();
+            $user['password'] = bcrypt($request->password);
+            $user->name = $request->name;
+            $user->email = $request->email;
 
+            $user->save();
+            $user->syncRoles($request->role);
+        }
         return redirect()->route('admin.index')->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        if(Auth::user()->hasDirectPermission('profile.destroy')){
+        User::where('id', $id)->delete();}
         return redirect()->back();
     }
 
-    public function permission(User $user){
-        $user_permission = $user->permissions;
-        $permissions = Permission::all();
+    public function permission(User $user)
+    {
+        if(Auth::user()->hasDirectPermission('profile.permission')) {
+            $user_permission = $user->permissions;
+            $permissions = Permission::all();
         return view('admin.permissions',['user_permissions'=>$user_permission, 'user'=>$user,'permissions'=>$permissions]);
+        }
     }
     public function add_permission(User $user, Request $request){
 
         if(!$user->hasPermissionTo($request->permission)){
-            return \redirect()->back();
+            return redirect()->back();
         }
         else{
             $user->givePermissionTo($request->permission);
-            return \redirect()->back();
+            return redirect()->back();
         }
     }
     public function revoke_permission($permission, User $user){

@@ -7,35 +7,35 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <button type="button" id="showModal" style="margin: 30px;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Yaratish</button>
+                        <button type="button" id="showModal" style="margin: 30px;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">@lang('message.create_button')</button>
 
                         <table class="table table-hover">
                             <thead>
                             <tr>
 
                                 <th>
-                                    Id
+                                    @lang('message.id')
                                 </th>
                                 <th>
-                                    Costumer's name
+                                    @lang('message.cust_name')
                                 </th>
                                 <th>
-                                    User's name
+                                    @lang('message.user_name')
                                 </th>
                                 <th>
-                                    Product
+                                    @lang('message.product')
                                 </th>
                                 <th>
-                                    Quantity
+                                    @lang('message.cost')
                                 </th>
                                 <th>
-                                    End day
+                                    @lang('message.end_day')
                                 </th>
                                 <th>
-                                    Day of purchase
+                                    @lang('message.today_day')
                                 </th>
                                 <th>
-                                    Status
+                                    @lang('message.status')
                                 </th>
                             </tr>
                             </thead>
@@ -55,7 +55,7 @@
 
                             </tbody>
                         </table>
-
+{{$debts->links()}}
 
                     </div>
 
@@ -70,7 +70,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">@lang('message.add_data')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -78,26 +78,26 @@
                     <form action="{{route('debt.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <label for="title">Enter Custumer's name</label>
+                            <label for="title">@lang('message.select_cust')</label>
                             <select class="custom-select" style="" id="selectBox" required name="costumer_id"  onchange= "desc()">
                                 @foreach($costumers as $costumer)
                                     <option value="{{$costumer->id}}">{{$costumer->name}}</option>
                                 @endforeach
                             </select>
 
-                            <label for="product">Enter name of product</label>
+                            <label for="product">@lang('message.add_product')</label>
                             <input type="text" id="product" name="product" class="form-control" required>
 
-                            <label for="quantity">Enter quantity of product</label>
-                            <input type="number" id="quantity" name="quantity" class="form-control" required>
+                            <label for="quantity">@lang('message.add_cost_product')</label>
+                            <input type="number" id="quantity" name="quantity" class="form-control"  class="money" required>
 
-                            <label for="end_day">Enter end day</label>
+                            <label for="end_day">@lang('message.end_day')</label>
                             <input type="date" id="end_day" name="end_day" class="form-control" required>
 
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
-                                <button type="submit" class="btn btn-primary">Saqlash</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('message.close')</button>
+                                <button type="submit" class="btn btn-primary">@lang('message.save_button')</button>
                             </div>
                         </div>
                     </form>

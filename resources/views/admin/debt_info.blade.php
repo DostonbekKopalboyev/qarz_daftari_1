@@ -8,30 +8,30 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <a href="{{url('costumer')}}" type="button"  style="margin: 30px;" class="btn btn-success" >Orqaga</a>
+                        <a href="{{url('costumer')}}" type="button"  style="margin: 30px;" class="btn btn-success" >@lang('message.back_button')</a>
 
-                        <p>This Customer's debts</p>
+                        <p>@lang('message.table_name_1')</p>
                         <table class="table table-hover">
                             <thead>
                             <tr>
 
                                 <th>
-                                    Id
+                                    @lang('message.id')
                                 </th>
                                 <th>
-                                    User's name
+                                    @lang('message.user_name')
                                 </th>
                                 <th>
-                                    Product
+                                     @lang('message.product')
                                 </th>
                                 <th>
-                                    Debts
+                                     @lang('message.debt')
                                 </th>
                                 <th>
-                                    date
+                                    @lang('message.date')
                                 </th>
                                 <th>
-                                    Status
+                                    @lang('message.status')
                                 </th>
                             </tr>
                             </thead>
@@ -50,29 +50,29 @@
                             @endforeach
                             <tr>
                                 <th>{{$debts->count('id')}}</th>
-                                <th colspan="2" style="text-align: center">Jami</th>
+                                <th colspan="2" style="text-align: center">@lang('message.total')</th>
 
                                 <th colspan="3"><span class="money">{{$debts->sum('quantity')}}</span></th>
                             </tr>
                             </tbody>
                         </table>
 
-                        <p>This Customer's payments</p>
+                        <p>@lang('message.table_name_2')</p>
 
                         <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    @lang('message.id')
                                 </th>
                                 <th>
-                                    User's name
+                                    @lang('message.user_name')
                                 </th>
                                 <th>
-                                    Quantity
+                                    @lang('message.money')
                                 </th>
                                 <th>
-                                    Day of purchase
+                                    @lang('message.date')
                                 </th>
                             </tr>
                             </thead>
@@ -87,7 +87,7 @@
                             @endforeach
                             <tr>
                                 <th>{{$payments->count('id')}}</th>
-                                <th colspan="1" style="text-align: center">Jami</th>
+                                <th colspan="1" style="text-align: center">@lang('message.total')</th>
                                 <th colspan="2" ><span class="money">{{$payments->sum('quantity')}}</span></th>
                             </tr>
                             </tbody>

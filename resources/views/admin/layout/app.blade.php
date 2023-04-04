@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -42,7 +42,7 @@
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">  @lang('message.Loading').</span>
         </div>
     </div>
     <!-- Spinner End -->
@@ -59,15 +59,14 @@
             <div class="navbar-nav w-100">
 
 
-                <a href="{{url('costumer')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Costumers</a>
-                <a href="{{url('debt')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Debt</a>
-                <a href="{{url('payment')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Payment</a>
-{{--                <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>--}}
+                <a href="{{url('costumer')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>@lang('message.customers')</a>
+                <a href="{{url('debt')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>@lang('message.debt')</a>
+                <a href="{{url('payment')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>@lang('message.payment')</a>
 
                 @if(auth()->user()->hasRole('admin'))
-                    <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Statistics</a>
+                    <a href="{{url('statistics')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>@lang('message.statistics')</a>
 
-                    <a href="{{route('admin.index')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>List of users</a>
+                    <a href="{{route('admin.index')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>@lang('message.list')</a>
                 @endif
             </div>
 
@@ -80,15 +79,53 @@
     <div class="content">
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+            <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                 <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
             </a>
             <a href="#" class="sidebar-toggler flex-shrink-0">
                 <i class="fa fa-bars"></i>
             </a>
             <form class="d-none d-md-flex ms-4">
-                <input class="form-control border-0" type="search" placeholder="Search">
+                <input class="form-control border-0" type="search" placeholder="@lang('message.search')">
             </form>
+
+
+{{--            Tilni tanlash uchun--}}
+
+            <div class="navbar-nav align-items-center ms-auto">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-language me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">@lang('message.language')</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                        <a href="{{route('lang.switch', ['lang' => 'uz'])}}" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">Uzbek</h6>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="{{route('lang.switch', ['lang' => 'en'])}}" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">English</h6>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="{{route('lang.switch', ['lang' => 'ru'])}}" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">Russian</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="navbar-nav align-items-center ms-auto">
 
                 <div class="nav-item dropdown">
@@ -104,7 +141,7 @@
                                onclick="event.preventDefault();
                 this.closest('form').submit();" class="dropdown-item">
                                 <i class="icon-key"></i>
-                                <span class="ml-2">Logout </span>
+                                <span class="ml-2">@lang('message.logout') </span>
                             </a>
                         </form>
                     </div>

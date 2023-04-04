@@ -7,26 +7,26 @@
                     <div class="col p-md-0" >
 
                         {{--                    modal uchun button--}}
-                        <button type="button" id="showModal" style="margin: 30px;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Yaratish</button>
+                        <button type="button" id="showModal" style="margin: 30px;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">@lang('message.create_button')</button>
 
                         <table class="table table-hover">
                             <thead>
                             <tr>
 
                                 <th>
-                                    Id
+                                    @lang('message.id')
                                 </th>
                                 <th>
-                                    Costumer's name
+                                    @lang('message.cust_name')
                                 </th>
                                 <th>
-                                    User's name
+                                    @lang('message.user_name')
                                 </th>
                                 <th>
-                                    Quantity
+                                    @lang('message.payment')
                                 </th>
                                 <th>
-                                    Day of purchase
+                                    @lang('message.today_day')
                                 </th>
                             </tr>
                             </thead>
@@ -43,7 +43,7 @@
 
                             </tbody>
                         </table>
-
+{{$payments->links()}}
 
                     </div>
 
@@ -58,7 +58,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">@lang('message.enter_payment')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,19 +66,19 @@
                     <form action="{{route('payment.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <label for="title">Enter Custumer's name</label>
+                            <label for="title">@lang('message.select_cust')</label>
                             <select class="custom-select" style="" required name="costumer_id">
                                 @foreach($costumers as $costumer)
                                     <option value="{{$costumer->id}}">{{$costumer->name}}</option>
                                 @endforeach
                             </select>
 
-                            <label for="quantity" style="margin-top: 15px;">Enter quantity of payment</label>
+                            <label for="quantity" style="margin-top: 15px;">@lang('message.money')</label>
                             <input type="number" id="quantity" name="quantity" class="form-control" required>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
-                                <button type="submit" class="btn btn-primary">Saqlash</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('message.close')</button>
+                                <button type="submit" class="btn btn-primary">@lang('message.save_button')</button>
                             </div>
                         </div>
                     </form>

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Costumer;
 use App\Models\Debt;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class CostumerController extends Controller
 {
@@ -15,11 +18,9 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        $costumers = Costumer::all()->sortByDesc('debt');
+        $costumers = Costumer::paginate(20);
+//      ->sortByDesc('debt');
 
-//        $info = Debt::all()->sortByDesc('created_at');
-//        $info = Payment::all()->sortByDesc('created_at');
-//        dd($info);
         return view('admin.costumer')->with('costumers' , $costumers);
     }
 
@@ -31,13 +32,12 @@ class CostumerController extends Controller
         //
     }
     public function debt_info(Request $request,Costumer $costumer){
-        $debts = $costumer->debts;
-        $payments = $costumer->payments;
-
-
-//        dd($costumer->id);
+        if(Auth::user()->hasDirectPermission('costumer.debt_info')) {
+            $debts = $costumer->debts;
+            $payments = $costumer->payments;
 
         return view('admin.debt_info',['debts'=>$debts,'payments'=>$payments, ]);
+        }
     }
 
 
@@ -46,16 +46,18 @@ class CostumerController extends Controller
      */
     public function store(Request $request):RedirectResponse
     {
-//        dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required'
-        ]);
-        $costumer = $request->all();
-        $costumer['user_id'] = auth()->user()->id;
-        Costumer::create($costumer);
-        return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
+        if(Auth::user()->hasDirectPermission('costumer.store')) {
+            $request->validate([
+                'name' => 'required',
+                'phone' => 'required',
+                'address' => 'required'
+            ]);
+            $costumer = $request->all();
+            $costumer['user_id'] = auth()->user()->id;
+            Costumer::create($costumer);
+        }
+            return redirect()->back()->with('success', 'Muvaffaqqiyatli qo\'shildi');
+
     }
 
     /**
@@ -79,20 +81,22 @@ class CostumerController extends Controller
      */
     public function update(Request $request, Costumer $costumer):RedirectResponse
     {
-        $request->validate([
-            'id' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required'
-        ]);
+        if(Auth::user()->hasDirectPermission('costumer.update')) {
+            $request->validate([
+                'id' => 'required',
+                'name' => 'required',
+                'phone' => 'required',
+                'address' => 'required'
+            ]);
 
-        $costumer = Costumer::find($request->id);
-        $costumer->name = $request->name;
-        $costumer->phone = $request->phone;
-        $costumer->address = $request->address;
-        $costumer->description = $request->description;
-        $costumer->save();
-        return redirect()->back()->with('success', 'Muvaffaqqiyatli yangilandi');
+            $costumer = Costumer::find($request->id);
+            $costumer->name = $request->name;
+            $costumer->phone = $request->phone;
+            $costumer->address = $request->address;
+            $costumer->description = $request->description;
+            $costumer->save();
+        }
+            return redirect()->back()->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     /**
@@ -100,7 +104,19 @@ class CostumerController extends Controller
      */
     public function destroy($id)
     {
-        Costumer::where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Muvaffaqqiyatli o\'chirildi');
+        if(Auth::user()->hasDirectPermission('costumer.destroy')) {
+            Costumer::where('id', $id)->delete();
+        }
+            return redirect()->back()->with('success', 'Muvaffaqqiyatli o\'chirildi');
+
+    }
+
+    public function permission(User $user)
+    {
+        if(Auth::user()->hasDirectPermission('profile.permission')) {
+            $user_permission = $user->permissions;
+            $permissions = Permission::all();
+            return view('admin.permissions',['user_permissions'=>$user_permission, 'user'=>$user,'permissions'=>$permissions]);
+        }
     }
 }
